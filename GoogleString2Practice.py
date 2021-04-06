@@ -16,8 +16,16 @@
 # If the string length is less than 3, leave it unchanged.
 # Return the resulting string.
 def verbing(s):
-  # +++your code here+++
-  return
+    # +++your code here+++
+    if len(s)<3:
+        return s    
+    
+    endString = s[len(s)-3:]
+
+    if endString == "ing":
+        return s + "ly"
+
+    return  s + "ing"
 
 
 # E. not_bad
@@ -30,7 +38,18 @@ def verbing(s):
 # This dinner is good!
 def not_bad(s):
   # +++your code here+++
-  return
+  
+  # need to look through whole string for "bad" if "bad" is not found return string
+  # "bad" should be higher index if after not so bad > not will need that replace with "good"
+  
+  badCheck = s.rfind("bad")
+  notCheck = s.rfind("not")
+
+  if notCheck < badCheck:
+    sub = s[notCheck:badCheck+3]
+    s = s.replace(sub, "good", 1)
+
+  return s
 
 
 # F. front_back
@@ -52,26 +71,26 @@ def test(got, expected):
     prefix = ' OK '
   else:
     prefix = '  X '
-  print '%s got: %s expected: %s' % (prefix, repr(got), repr(expected))
+  print ('%s got: %s expected: %s' % (prefix, repr(got), repr(expected)))
 
 
 # main() calls the above functions with interesting inputs,
 # using the above test() to check if the result is correct or not.
 def main():
-  print 'verbing'
+  print('verbing')
   test(verbing('hail'), 'hailing')
   test(verbing('swiming'), 'swimingly')
   test(verbing('do'), 'do')
 
-  print
-  print 'not_bad'
+  print()
+  print('not_bad')
   test(not_bad('This movie is not so bad'), 'This movie is good')
   test(not_bad('This dinner is not that bad!'), 'This dinner is good!')
   test(not_bad('This tea is not hot'), 'This tea is not hot')
   test(not_bad("It's bad yet not"), "It's bad yet not")
 
-  print
-  print 'front_back'
+  print()
+  print('front_back')
   test(front_back('abcd', 'xy'), 'abxcdy')
   test(front_back('abcde', 'xyz'), 'abcxydez')
   test(front_back('Kitten', 'Donut'), 'KitDontenut')
