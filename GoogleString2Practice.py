@@ -41,9 +41,10 @@ def not_bad(s):
   
   # need to look through whole string for "bad" if "bad" is not found return string
   # "bad" should be higher index if after not so bad > not will need that replace with "good"
+  # need to use .find, .rfind finds the last occurrence while .find finds the first occurrence 
   
-  badCheck = s.rfind("bad")
-  notCheck = s.rfind("not")
+  badCheck = s.find("bad")
+  notCheck = s.find("not")
 
   if notCheck < badCheck:
     sub = s[notCheck:badCheck+3]
@@ -61,7 +62,28 @@ def not_bad(s):
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
   # +++your code here+++
-  return
+  if len(a) % 2 == 0:
+    aFront = a[:int(len(a)/2)]
+    aBack = a[int(len(a)/2):]
+  else:
+    # if I had a string of 3 then I would want to get the first two characters for the return string 
+    # i need to break the string into the form 2n+1
+    # going to assume strings are bigger than 1 
+    # 3 = 2 + 1
+    # 5 = 4 + 1 = 2+2+1 =2(1+1)+1 = 2(2)+1 -> 2(2) is front and back while the +1 is the middle character of the odd string
+    # 5-1 = 4 -> int(4/2) = 2 -> aFront = a[:int((len(a)-1)/2)+1] while aBack = a=[int((len(a)-1)/2):]
+    
+    aFront = a[:int((len(a)-1)/2)+1]
+    aBack = a[int((len(a)-1)/2)+1:]
+
+  if len(b) % 2 == 0:
+    bFront = b[:int(len(b)/2)]
+    bBack = b[int(len(b)/2):]
+  else:
+    bFront = b[:int((len(b)-1)/2)+1]
+    bBack = b[int((len(b)-1)/2)+1:]
+
+  return aFront + bFront + aBack + bBack
 
 
 # Simple provided test() function used in main() to print
