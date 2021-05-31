@@ -121,9 +121,10 @@ def main():
     else:   # populate grid with random on/off -
             # more off than on
         grid = randomGrid(N)
- 
+
     # set up animation
     fig, ax = plt.subplots()
+    
     img = ax.imshow(grid, interpolation='nearest')
     ani = animation.FuncAnimation(fig, update, fargs=(img, grid, N, ),
                                   frames = 10,
